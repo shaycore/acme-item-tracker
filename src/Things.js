@@ -12,7 +12,7 @@ const Things = ({ things, deleteThing })=> {
           things.map( thing => {
             return (
               <li key={ thing.id }>
-                { thing.name }
+                { thing.name } - RANK: { thing.rank }
                 <button onClick={()=> deleteThing(thing) }>Remove</button>
               </li>
             );
