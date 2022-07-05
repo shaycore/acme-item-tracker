@@ -31,8 +31,15 @@ const store = createStore((state = initialState, action)=> {
     const things = state.things.filter(_thing => _thing.userId !== action.user.id);
     return {...state, users, things};
   }
+  if(action.type === 'UPDATE_THING'){
+    state.things.map(_thing => {
+      if (_thing.id === action.thing.id) {
+        _thing.rank = action.thing.rank
+      }
+    });
+    return {...state, things: [...state.things]};
+  }
   return state;
 });
 
 export default store;
-

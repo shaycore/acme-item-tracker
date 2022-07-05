@@ -3,7 +3,7 @@ import ThingForm from './ThingForm';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-const Things = ({ things, deleteThing })=> {
+const Things = ({ things, deleteThing, changeRank })=> {
   return (
     <div>
       <h1>Things</h1>
@@ -13,6 +13,9 @@ const Things = ({ things, deleteThing })=> {
             return (
               <li key={ thing.id }>
                 { thing.name } - RANK: { thing.rank }
+                <button onClick={()=> changeRank(thing,'up') }>+</button>
+                <button onClick={()=> changeRank(thing,'down') }>-</button>
+                <br />
                 <button onClick={()=> deleteThing(thing) }>Remove</button>
               </li>
             );
@@ -36,19 +39,18 @@ const mapDispatchToProps = (dispatch)=> {
     deleteThing: async(thing)=> {
       await axios.delete(`/api/things/${thing.id}`);
       dispatch({ type: 'DELETE_THING', thing });
+    },
+    changeRank: async(thing,direction)=> {
+      let value = thing.rank;
+      if (direction === 'up') {
+        value++
+      } else if (direction === 'down') {
+        value--
+      }
+      thing = (await axios.put(`/api/things/${thing.id}`,{ rank: value })).data;
+      dispatch({ type: 'UPDATE_THING', thing });
     }
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Things);
-
-
-
-// export default connect(
-//   (state)=> {
-//     return {
-//       things: state.things
-//     }
-//   }
-// )(Things);
-
