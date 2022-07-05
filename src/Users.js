@@ -1,4 +1,5 @@
 import React from 'react';
+import UserForm from './UserForm';
 import { connect } from 'react-redux';
 
 
@@ -17,6 +18,7 @@ const Users = ({ users })=> {
           })
         }
       </ul>
+      <UserForm />
     </div>
   );
 }
@@ -26,4 +28,13 @@ const mapStateToProps = (state)=> {
     users: state.users
   };
 }
+
 export default connect(mapStateToProps)(Users);
+
+// export default connect(
+//   (state)=> {
+//     return {
+//       users: state.users
+//     }
+//   }
+// )(Users);
