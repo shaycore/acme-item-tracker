@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 const Things = ({ things, deleteThing, changeRank })=> {
+  
+  things.sort((a, b) => (a.rank < b.rank) ? 1 : -1)
+
   return (
     <div>
       <h1>Things</h1>
