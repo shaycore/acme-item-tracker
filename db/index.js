@@ -9,12 +9,12 @@ const syncAndSeed = async()=> {
     const [bob, joe, lucy, ethyl] = await Promise.all(
       ['Bob', 'Joe', 'Lucy', 'Ethyl'].map( name => User.create({ name }))
     );
-    const [foo, bar, bazz, quq, fizz] = await Promise.all([
-      Thing.create({ name: 'Foo', userId: bob.id }),
-      Thing.create({ name: 'Bar', userId: lucy.id }),
-      Thing.create({ name: 'Bazz', userId: lucy.id }),
-      Thing.create({ name: 'Quq'}),
-      Thing.create({ name: 'Fizz', userId: ethyl.id })
+    const [keyboard, album, vodka, whiskey, chopsticks] = await Promise.all([
+      Thing.create({ name: 'Keyboard', userId: bob.id, rank: 5 }),
+      Thing.create({ name: 'Album', userId: ethyl.id }),
+      Thing.create({ name: 'Whiskey', userId: lucy.id, rank: 3 }),
+      Thing.create({ name: 'Vodka', userId: lucy.id }),
+      Thing.create({ name: 'Chopsticks', rank: 2})
     ]);
   }
   catch(err){

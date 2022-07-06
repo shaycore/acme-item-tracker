@@ -18,7 +18,7 @@ const Users = ({ things, users, deleteUser })=> {
                 <b>{ user.name }</b>
                 <br />
                 <ul>
-                  { (ownedThings.length > 0) ? "Owned Items:":"This User owns no items! How sad." }
+                  { (ownedThings.length > 0) ? "Owned Items:":"This User owns no items! :(" }
                   { ownedThings.map(thing => {
                     return (
                       <li key={ thing.id }>

@@ -1,3 +1,7 @@
+body {
+    background-color: cornSilk;
+}
+
 nav {
     display: flex;
     justify-content: space-around;
@@ -7,6 +11,7 @@ nav {
 nav a.selected {
     font-weight: bold;
     font-size: 1.5rem;
+    color: dodgerBlue;
 }
 
 div {
@@ -20,15 +25,16 @@ ul {
     padding: 2rem;
     align-items: center;
     list-style-type: none;
-
 }
 
 li {
     border: 1px solid black;
     width: 33%;
     padding: 1rem;
+    background-color: peachpuff;
 }
 
 button {
     border-radius: 25px;
+    cursor: pointer;
 }

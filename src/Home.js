@@ -8,7 +8,7 @@ const Home = ({ users, things })=> {
     <div>
       <h1>Home</h1>
       <p>
-        Here at the Acme Item Tracker Corp we have { users.length } users and { things.length } things!
+        Here at the Acme Item Tracker Corp we have <b>{ users.length }</b> users and <b>{ things.length }</b> things!
       </p>
       Our top Three Ranked Items!
       <ul>

@@ -3,7 +3,7 @@ import ThingForm from './ThingForm';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-const Things = ({ users, things, deleteThing, changeRank })=> {
+const Things = ({ users, things, deleteThing, changeRank, changeOwner })=> {
   things.sort((a, b) => (a.rank < b.rank) ? 1 : -1)
 
   return (
@@ -25,7 +25,20 @@ const Things = ({ users, things, deleteThing, changeRank })=> {
                 <button onClick={()=> changeRank(thing,'down') }>-</button>
                 <br />
                 <br />
-                { user ? `Belongs to: ${user.name}` : "No Owner :(" }
+                Owner: 
+                <br />
+                <select defaultValue={thing.userId ? thing.userId: ''} onChange={(event)=>changeOwner(event.target.value, thing.id)}>
+                  <option value=''>--No Owner--</option>
+                  {
+                    users.map(user => {
+                      return (
+                        <option value={user.id} key={user.id}>
+                          { user.name }
+                        </option>
+                      )
+                    })
+                  }
+                </select>
                 <br />
                 <br />
                 <button onClick={()=> deleteThing(thing) }>Remove Thing</button>
@@ -60,6 +73,10 @@ const mapDispatchToProps = (dispatch)=> {
         value--
       }
       thing = (await axios.put(`/api/things/${thing.id}`,{ rank: value })).data;
+      dispatch({ type: 'UPDATE_THING', thing });
+    },
+    changeOwner: async(owner, thing) => {
+      thing = (await axios.put(`/api/things/${thing}`,{ userId: owner })).data;
       dispatch({ type: 'UPDATE_THING', thing });
     }
   };

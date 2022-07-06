@@ -34,7 +34,8 @@ const store = createStore((state = initialState, action)=> {
   if(action.type === 'UPDATE_THING'){
     state.things.map(_thing => {
       if (_thing.id === action.thing.id) {
-        _thing.rank = action.thing.rank
+        _thing.rank = action.thing.rank;
+        _thing.userId = action.thing.userId;
       }
     });
     return {...state, things: [...state.things]};
