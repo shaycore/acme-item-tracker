@@ -7,6 +7,8 @@ const app = express();
 const path = require('path');
 
 app.use(express.json());
+
+app.use('/assets', express.static('assets'));
 app.use('/dist', express.static('dist'));
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));

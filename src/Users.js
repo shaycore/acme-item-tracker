@@ -8,6 +8,7 @@ const Users = ({ things, users, deleteUser })=> {
   return (
     <div>
       <h1>Users</h1>
+      <UserForm />
       <ul>
         {
           users.map( user => {
@@ -16,7 +17,8 @@ const Users = ({ things, users, deleteUser })=> {
               <li key={ user.id }>
                 <b>{ user.name }</b>
                 <br />
-                <ol>
+                <ul>
+                  { (ownedThings.length > 0) ? "Owned Items:":"This User owns no items! How sad." }
                   { ownedThings.map(thing => {
                     return (
                       <li key={ thing.id }>
@@ -24,14 +26,13 @@ const Users = ({ things, users, deleteUser })=> {
                       </li>
                     )
                   }) }
-                </ol>
+                </ul>
                 <button onClick={()=> deleteUser(user) }>Delete User</button>
               </li>
             );
           })
         }
       </ul>
-      <UserForm />
     </div>
   );
 }

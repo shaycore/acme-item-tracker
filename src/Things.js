@@ -9,25 +9,31 @@ const Things = ({ users, things, deleteThing, changeRank })=> {
   return (
     <div>
       <h1>Things</h1>
+      <ThingForm />
       <ul>
         {
           things.map( thing => {
             const user = users.find( _user => _user.id === thing.userId );
             return (
               <li key={ thing.id }>
-                { thing.name } - RANK: { thing.rank }
+                { thing.name }
+                <br />
+                <br />
+                RANK: { thing.rank }   
+                <br />
                 <button onClick={()=> changeRank(thing,'up') }>+</button>
                 <button onClick={()=> changeRank(thing,'down') }>-</button>
                 <br />
-                Belongs to: { user ? user.name : "Nobody Owns This!!" }
                 <br />
-                <button onClick={()=> deleteThing(thing) }>Remove</button>
+                { user ? `Belongs to: ${user.name}` : "No Owner :(" }
+                <br />
+                <br />
+                <button onClick={()=> deleteThing(thing) }>Remove Thing</button>
               </li>
             );
           })
         }
       </ul>
-      <ThingForm />
     </div>
   );
 };

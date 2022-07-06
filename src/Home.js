@@ -11,15 +11,17 @@ const Home = ({ users, things })=> {
         Here at the Acme Item Tracker Corp we have { users.length } users and { things.length } things!
       </p>
       Our top Three Ranked Items!
-      {
-        (things.slice(0, 3)).map(thing => {
-          return (
-            <li key={ thing.id }>
-              { thing.name } - RANK: { thing.rank }
-            </li>
-          );
-        })
-      }
+      <ul>
+        {
+          (things.slice(0, 3)).map(thing => {
+            return (
+              <li key={ thing.id }>
+                { thing.name } - RANK: { thing.rank }
+              </li>
+            );
+          })
+        }
+      </ul>
     </div>
   );
 };
