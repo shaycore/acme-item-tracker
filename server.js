@@ -1,4 +1,7 @@
-const { conn, User, Thing } = require('./db');
+const db = require('./db');
+const { syncAndSeed } = db;
+const { User } = require('./db/User');
+const { Thing } = require('./db/Thing');
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -83,13 +86,7 @@ app.listen(port, ()=> console.log(`listening on port ${port}`));
 
 const init = async()=> {
   try {
-    await conn.sync({ force: true });
-    const [moe, larry, lucy, ethyl] = await Promise.all(
-      ['moe', 'larry', 'lucy', 'ethyl'].map( name => User.create({ name }))
-    );
-    const [foo, bar, bazz, quq, fizz] = await Promise.all(
-      ['Foo', 'Bar', 'Bazz', 'Quq', 'Fizz'].map( name => Thing.create({ name }))
-    );
+    await db.syncAndSeed();
   }
   catch(ex){
     console.log(ex);
