@@ -4,16 +4,27 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 
-const Users = ({ users, deleteUser })=> {
+const Users = ({ things, users, deleteUser })=> {
   return (
     <div>
       <h1>Users</h1>
       <ul>
         {
           users.map( user => {
+            const ownedThings = things.filter(_thing => _thing.userId == user.id)
             return (
               <li key={ user.id }>
-                { user.name }
+                <b>{ user.name }</b>
+                <br />
+                <ol>
+                  { ownedThings.map(thing => {
+                    return (
+                      <li key={ thing.id }>
+                        { thing.name }
+                      </li>
+                    )
+                  }) }
+                </ol>
                 <button onClick={()=> deleteUser(user) }>Delete User</button>
               </li>
             );
@@ -27,7 +38,8 @@ const Users = ({ users, deleteUser })=> {
 
 const mapStateToProps = (state)=> {
   return {
-    users: state.users
+    users: state.users,
+    things: state.things
   };
 }
 
