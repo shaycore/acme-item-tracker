@@ -3,8 +3,7 @@ import ThingForm from './ThingForm';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-const Things = ({ things, deleteThing, changeRank })=> {
-  
+const Things = ({ users, things, deleteThing, changeRank })=> {
   things.sort((a, b) => (a.rank < b.rank) ? 1 : -1)
 
   return (
@@ -13,11 +12,14 @@ const Things = ({ things, deleteThing, changeRank })=> {
       <ul>
         {
           things.map( thing => {
+            const user = users.find( _user => _user.id === thing.userId );
             return (
               <li key={ thing.id }>
                 { thing.name } - RANK: { thing.rank }
                 <button onClick={()=> changeRank(thing,'up') }>+</button>
                 <button onClick={()=> changeRank(thing,'down') }>-</button>
+                <br />
+                Belongs to: { user ? user.name : "Nobody Owns This!!" }
                 <br />
                 <button onClick={()=> deleteThing(thing) }>Remove</button>
               </li>
@@ -33,7 +35,8 @@ const Things = ({ things, deleteThing, changeRank })=> {
 
 const mapStateToProps = (state)=> {
   return {
-    things: state.things
+    things: state.things,
+    users: state.users
   }
 }
 
